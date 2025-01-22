@@ -8,17 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var viewModel: SetGameViewModel
     var body: some View {
         VStack {
-            Image(systemName: "globe")
+            Text("hi")
+                .font(.largeTitle)
                 .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+                .fontWeight(.bold)
+            ScrollView {
+                Text("\(viewModel.cards)")
+            }
+            .padding()
         }
-        .padding()
+        Spacer()
+       // .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(viewModel: SetGameViewModel())
 }

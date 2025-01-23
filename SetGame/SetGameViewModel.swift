@@ -8,64 +8,54 @@
 import SwiftUI
 
 class SetGameViewModel: ObservableObject {
-    @Published private(set) var gameModel: SetGameModel = SetGameModel()
-    
-    var cards: [Card] {
-        return gameModel.cards
+    @Published private var model: SetGameModel = SetGameModel()
+    var cards: Array<SetGameModel.Card> {
+        return model.cards
     }
-    var score: Int {
-        return gameModel.score
-    }
-   /* @Published private var cardShape: any Shape
-    @Published private var cardNumberOfShapes: Int
-    @Published private var cardShading: Double
-    @Published private var cardColor: Color
-    init(cardShape: any Shape, cardNumberOfShapes: Int, cardShading: Double, cardColor: Color) {
-        self.cardShape = cardShape
-        self.cardNumberOfShapes = cardNumberOfShapes
-        self.cardShading = cardShading
-        self.cardColor = cardColor
-    }*/
-    
- /*   func cardShapeChanger(Shape num: Int) -> any Shape {
-        switch num{
-        case 1:
-            return Rectangle()
-        case 2:
-            return Circle()
-        case 3:
-            return Ellipse()
-        default:
-            return Ellipse()
+    var realArray: Array<ActualCard> {
+        cards.map { card in
+            var realCard = ActualCard(shape: Rectangle(), color: .red, numberOfShapes: card.numberOfShapes, shading: card.shading)
+            switch card.shape {
+            case .Rectangle:
+                realCard.shape = Rectangle()
+            case .Circle:
+                realCard.shape = Circle()
+            case .Ellipse:
+                realCard.shape = Ellipse()
+            }
+            switch card.color {
+            case .red:
+                realCard.color = .red
+            case .green:
+                realCard.color = .green
+            case .blue:
+                realCard.color = .blue
+            }
+            return realCard
         }
     }
-    func cardShadingChanger(Shade num: Int) -> Double {
-        switch num {
-        case 1:
-            return 0.1
-        case 2:
-            return 0.5
-        case 3:
-            return 0.9
-        default:
-            return 1.0
+    var initalPlayerCards: Array<ActualCard> {
+        var playerCards: Array<ActualCard> = []
+        for k in 0...0 {
+            playerCards.append(realArray[k])
         }
+        return playerCards
     }
-    func cardColorChanger(Color num: Int) -> Color {
-        switch num {
-            case 1:
-                return Color(.red)
-            case 2:
-                return Color(.green)
-            case 3:
-                return Color(.blue)
-            default:
-                return Color(.gray)
-        }
-     }
-    
-*/
 }
-
-
-
+struct ActualCard: Identifiable {
+    var id: String = ""
+    var isMatched = false
+    var isSelected = false
+    var shape: any Shape
+    var color: Color
+    var numberOfShapes: Int
+    var shading: Int
+    init(isMatched: Bool = false, isSelected: Bool = false, shape: any Shape, color: Color, numberOfShapes: Int, shading: Int) {
+        self.isMatched = isMatched
+        self.isSelected = isSelected
+        self.shape = shape
+        self.color = color
+        self.numberOfShapes = numberOfShapes
+        self.shading = shading
+    }
+}

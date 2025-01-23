@@ -13,6 +13,7 @@
 		ADD435042D405B7C004A16AA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADD435032D405B7C004A16AA /* Preview Assets.xcassets */; };
 		ADD4350B2D405B97004A16AA /* SetGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD4350A2D405B97004A16AA /* SetGameModel.swift */; };
 		ADD4350D2D405BAF004A16AA /* SetGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD4350C2D405BAF004A16AA /* SetGameViewModel.swift */; };
+		ADD4350F2D41CBC7004A16AA /* AspectVGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD4350E2D41CBC7004A16AA /* AspectVGrid.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		ADD435032D405B7C004A16AA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		ADD4350A2D405B97004A16AA /* SetGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGameModel.swift; sourceTree = "<group>"; };
 		ADD4350C2D405BAF004A16AA /* SetGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGameViewModel.swift; sourceTree = "<group>"; };
+		ADD4350E2D41CBC7004A16AA /* AspectVGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectVGrid.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 		ADD434FB2D405B7B004A16AA /* SetGame */ = {
 			isa = PBXGroup;
 			children = (
+				ADD4350E2D41CBC7004A16AA /* AspectVGrid.swift */,
 				ADD434FC2D405B7B004A16AA /* SetGameApp.swift */,
 				ADD434FE2D405B7B004A16AA /* ContentView.swift */,
 				ADD4350A2D405B97004A16AA /* SetGameModel.swift */,
@@ -146,6 +149,7 @@
 				ADD434FF2D405B7B004A16AA /* ContentView.swift in Sources */,
 				ADD434FD2D405B7B004A16AA /* SetGameApp.swift in Sources */,
 				ADD4350B2D405B97004A16AA /* SetGameModel.swift in Sources */,
+				ADD4350F2D41CBC7004A16AA /* AspectVGrid.swift in Sources */,
 				ADD4350D2D405BAF004A16AA /* SetGameViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

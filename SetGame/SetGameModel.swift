@@ -6,47 +6,24 @@
 //
 
 import Foundation
-struct SetGameModel {
+struct SetGameModel<CardContent> {
     private(set) var cards: Array<Card>
     private(set) var score: Int = 0
-    enum CardShape: CaseIterable {
-        case Rectangle, Circle, Ellipse
-    }
-    
-    enum CardColor: CaseIterable {
-        case red, green, blue
-    }
-
-    init() {
-        // Loop through all combinations of the attributes
+    init(cardContentFactory: (Int) -> CardContent) {
         cards = []
-        for shapeIndex in CardShape.allCases {
-            for colorIndex in CardColor.allCases {
-                for numberOfShapesIndex in 1...3 {
-                    for shadingIndex in 1...3 {
-                        // Create a new card for each combination of attributes
-                        let card = Card(shape: shapeIndex, color: colorIndex, numberOfShapes: numberOfShapesIndex, shading: shadingIndex)
-                        cards.append(card)
-                    }
-                }
-            }
+        score = 0
+        // loops through the pairs using cardContentFactory to generate the content for each pair
+        // creates two card objects for each pair with unique ids
+        for pairIndex in 0...8 {
+            let content = cardContentFactory(pairIndex)
+            cards.append(Card(content: content))
         }
         cards.shuffle()
-        print(cards)  // Print all the cards for debugging
     }
     struct Card {
         var isMatched = false
         var isSelected = false
-        var shape: CardShape
-        var color: CardColor
-        var numberOfShapes: Int
-        var shading: Int
-        init(shape: CardShape, color: CardColor, numberOfShapes: Int, shading: Int) {
-            self.shape = shape
-            self.color = color
-            self.numberOfShapes = numberOfShapes
-            self.shading = shading
-        }
+        var content: CardContent
     }
 }
 

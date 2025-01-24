@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AspectVGrid<Item: Identifiable, ItemView: View>: View {
+/*struct AspectVGrid<Item: Identifiable, ItemView: View>: View {
     @ObservedObject var viewModel: SetGameViewModel
     var items: [Item]
     var aspectRatio: CGFloat = 1
@@ -46,4 +46,4 @@ struct AspectVGrid<Item: Identifiable, ItemView: View>: View {
      reversedNames = names.sorted(by: { $0 > $1 } )
      */
 }
-
+*/

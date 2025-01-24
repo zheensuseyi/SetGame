@@ -10,26 +10,23 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject var viewModel: SetGameViewModel
     var body: some View {
-        VStack {
-            Text("hi")
-                .font(.largeTitle)
+        ZStack {
+           Rectangle()
+                .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                .opacity(0.7)
+            Rectangle()
+                .imageScale(.small)
+                 .foregroundColor(.green)
+                 .opacity(0.7)
+            Rectangle()
                 .imageScale(.large)
-                .fontWeight(.bold)
-            cards
+                 .foregroundColor(.pink)
+                 .opacity(0.7)
         }
-        Spacer()
-       // .padding()
-    }
-    @ViewBuilder
-    private var cards: some View {
-        AspectVGrid(viewModel: viewModel, items: viewModel.realArray, aspectRatio: aspectRatio) { card in
-            CardView(card)
-                .aspectRatio(aspectRatio, contentMode: .fit)
-                .padding(4)
-        }
+        .padding()
     }
 }
-struct CardView: View {
+/*struct CardView: View {
     let card: ActualCard
     init(_ card: ActualCard) {
         self.card = card
@@ -50,7 +47,7 @@ struct CardView: View {
             base.fill()
         }
     }
-}
+}*/
 
 #Preview {
     ContentView(viewModel: SetGameViewModel())

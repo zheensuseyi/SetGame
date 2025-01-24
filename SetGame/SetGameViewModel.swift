@@ -8,51 +8,78 @@
 import SwiftUI
 
 class SetGameViewModel: ObservableObject {
-    @Published private var model: SetGameModel = SetGameModel()
-    var cards: Array<SetGameModel.Card> {
-        return model.cards
-    }
-    var realArray: Array<ActualCard> {
-        cards.map { card in
-            var realCard = ActualCard(shape: Rectangle(), color: .red, numberOfShapes: card.numberOfShapes, shading: card.shading)
-            switch card.shape {
-            case .Rectangle:
-                realCard.shape = Rectangle()
-            case .Circle:
-                realCard.shape = Circle()
-            case .Ellipse:
-                realCard.shape = Ellipse()
+    enum CardShape: CaseIterable {
+        case rectangle, circle, ellipse
+
+        var shape: any Shape {
+            switch self {
+            case .rectangle:
+                return Rectangle()
+            case .circle:
+                return Circle()
+            case .ellipse:
+                return Ellipse()
             }
-            switch card.color {
+        }
+    }
+
+    enum CardColor: CaseIterable {
+        case red, blue, green
+
+        var color: Color {
+            switch self {
             case .red:
-                realCard.color = .red
-            case .green:
-                realCard.color = .green
+                return .red
             case .blue:
-                realCard.color = .blue
+                return .blue
+            case .green:
+                return .green
             }
-            return realCard
         }
     }
-    var initalPlayerCards: Array<ActualCard> {
-        var playerCards: Array<ActualCard> = []
-        for k in 0...0 {
-            playerCards.append(realArray[k])
+    // Initializer
+    var cards: [CardTheme] {
+        var newCards: [CardTheme] = []
+
+        for shape in CardShape.allCases {
+            for color in CardColor.allCases {
+                for numberOfShapes in 1...3 {
+                    for shading in 1...3 {
+                        // Use `shape.shape` to access the actual Shape instance
+                        let card = CardTheme(
+                            shape: shape.shape,
+                            color: color.color,
+                            numberOfShapes: numberOfShapes,
+                            shading: shading
+                        )
+                        newCards.append(card)
+                    }
+                }
+            }
         }
-        return playerCards
+        return newCards
     }
+    private static func createSetGame(_ cards: [CardTheme]) -> SetGameModel<Any> {
+        return SetGameModel {
+            if cards.indices.contains($0) {
+                return $0
+            }
+            else {
+                return "⁉️"
+            }
+        }
+    }
+    @Published var model: SetGameModel<Any> = SetGameViewModel.createSetGame(cards)
+
 }
-struct ActualCard: Identifiable {
-    var id: String = ""
-    var isMatched = false
-    var isSelected = false
+
+
+struct CardTheme {
     var shape: any Shape
     var color: Color
     var numberOfShapes: Int
     var shading: Int
-    init(isMatched: Bool = false, isSelected: Bool = false, shape: any Shape, color: Color, numberOfShapes: Int, shading: Int) {
-        self.isMatched = isMatched
-        self.isSelected = isSelected
+    init(shape: any Shape, color: Color, numberOfShapes: Int, shading: Int) {
         self.shape = shape
         self.color = color
         self.numberOfShapes = numberOfShapes
